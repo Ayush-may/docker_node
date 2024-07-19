@@ -1,0 +1,19 @@
+services:
+    app:
+        container_name: nodemontry
+        command: npm run dev
+        environment:
+            - PORT=8000
+        build: .
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/app
+            - /app/node_modules
+        develop:
+            watch:
+                - action: sync
+                  path: ./index.js
+                  target: /app
+                - action : rebuild
+                  path : package.json
